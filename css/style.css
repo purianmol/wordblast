@@ -730,6 +730,55 @@ a:hover { text-decoration: underline; }
   .pack-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* =====================================================
+   COMBO INDICATOR
+   ===================================================== */
+
+.combo-indicator {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--warn);
+  text-shadow: 0 0 8px rgba(251,191,36,.5);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.combo-indicator.hidden { opacity: 0; }
+
+/* Subtle scanline overlay for game canvas (decoration) */
+.game-canvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,.03) 3px,
+    rgba(0,0,0,.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* =====================================================
+   UTILITY
+   ===================================================== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =====================================================
+   RESPONSIVE – MOBILE (< 600px)
+   ===================================================== */
+
 @media (max-width: 600px) {
   :root { --nav-h: 56px; }
 
