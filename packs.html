@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WordBlast – Word Packs. Create, view, edit and delete your custom word packs for the typing game." />
+  <title>WordBlast – Word Packs</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo" aria-label="WordBlast home">
+      ⚡ <span>WordBlast</span>
+    </a>
+    <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
+    <nav class="navbar__links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html">Play</a>
+      <a href="packs.html" class="active" aria-current="page">Word Packs</a>
+      <a href="scores.html">Scores</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">🌙</button>
+    </nav>
+  </header>
+
+  <main class="packs-main">
+    <h1 class="page-title">📦 Word Packs</h1>
+    <p class="page-subtitle">Create and manage your custom word packs for WordBlast.</p>
+
+    <!-- ===== CREATE / EDIT FORM ===== -->
+    <section class="card form-card" aria-labelledby="packFormTitle">
+      <h2 id="packFormTitle" class="card__title">Create New Pack</h2>
+
+      <form id="packForm" novalidate>
+        <div class="form-group">
+          <label for="packNameInput">Pack Name</label>
+          <input
+            type="text"
+            id="packNameInput"
+            name="packName"
+            placeholder="e.g. Animals"
+            maxlength="30"
+            required
+            aria-required="true"
+            aria-describedby="packNameError"
+          />
+          <span class="field-error" id="packNameError" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="packWordsInput">Words <span class="hint">(one per line or comma-separated, a–z only, 2–15 letters each, min 5 words)</span></label>
+          <textarea
+            id="packWordsInput"
+            name="packWords"
+            rows="6"
+            placeholder="tiger&#10;zebra&#10;monkey&#10;rabbit&#10;dolphin"
+            required
+            aria-required="true"
+            aria-describedby="packWordsError packDupNote"
+          ></textarea>
+          <span class="field-error" id="packWordsError" aria-live="polite"></span>
+          <span class="field-info" id="packDupNote" aria-live="polite"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" id="savePackBtn">💾 Save Pack</button>
+          <button type="button" class="btn btn--ghost" id="cancelPackBtn">✕ Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== PACK LIST ===== -->
+    <section class="packs-section" aria-labelledby="packsListTitle">
+      <div class="packs-section__header">
+        <h2 id="packsListTitle" class="section-title">Your Packs</h2>
+        <button class="btn btn--ghost btn--small" id="restoreDefaultsBtn" aria-label="Restore the three default word packs">
+          🔄 Restore Defaults
+        </button>
+      </div>
+
+      <div class="pack-grid" id="packGrid">
+        <!-- Pack cards rendered by packs.js -->
+        <p class="empty-state" id="emptyPacksMsg" hidden>No word packs yet. Create one above!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>WordBlast &bull; Web Fundamentals 2026 &bull; <span id="footerYear"></span></p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/packs.js"></script>
+</body>
+</html>

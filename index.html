@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WordBlast – A falling words typing game. Choose a word pack, pick your difficulty and type words before they hit the ground." />
+  <title>WordBlast – Play</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo" aria-label="WordBlast home">
+      ⚡ <span>WordBlast</span>
+    </a>
+    <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
+    <nav class="navbar__links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html" class="active" aria-current="page">Play</a>
+      <a href="packs.html">Word Packs</a>
+      <a href="scores.html">Scores</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== SETUP PANEL ===== -->
+    <section class="setup-panel" id="setupPanel" aria-labelledby="setupHeading">
+      <h1 id="setupHeading" class="setup-panel__title">⚡ WordBlast</h1>
+      <p class="setup-panel__subtitle">Type falling words before they hit the ground!</p>
+
+      <div class="setup-panel__form">
+        <div class="form-group">
+          <label for="packSelect">Word Pack</label>
+          <select id="packSelect" name="pack">
+            <option value="">Loading packs…</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="difficultySelect">Difficulty</label>
+          <select id="difficultySelect" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="playerNameInput">Your Name</label>
+          <input type="text" id="playerNameInput" name="player" placeholder="Enter your name" maxlength="15" autocomplete="off" />
+          <span class="field-error" id="playerNameError" aria-live="polite"></span>
+        </div>
+
+        <button class="btn btn--primary btn--large" id="startBtn">
+          ▶ Start Game
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== GAME AREA ===== -->
+    <section class="game-area-wrap" id="gameArea" aria-label="Game area" hidden>
+      <!-- Stats bar -->
+      <div class="stats-bar" role="status" aria-live="polite" aria-label="Game statistics">
+        <div class="stat">
+          <span class="stat__label">Score</span>
+          <span class="stat__value" id="statScore">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">Level</span>
+          <span class="stat__value" id="statLevel">1</span>
+        </div>
+        <div class="stat stat--lives">
+          <span class="stat__label">Lives</span>
+          <span class="stat__value" id="statLives">❤️❤️❤️</span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">WPM</span>
+          <span class="stat__value" id="statWpm">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">Accuracy</span>
+          <span class="stat__value" id="statAccuracy">100%</span>
+        </div>
+      </div>
+
+      <!-- The game canvas -->
+      <div class="game-canvas" id="gameCanvas" aria-hidden="true">
+        <div class="danger-line" aria-hidden="true"></div>
+        <!-- Falling word divs are injected here by game.js -->
+      </div>
+
+      <!-- Typing controls -->
+      <div class="game-controls">
+        <input
+          type="text"
+          id="typingInput"
+          class="typing-input"
+          placeholder="Type here…"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Type the falling word here"
+        />
+        <button class="btn btn--secondary" id="pauseBtn" aria-label="Pause game">Pause</button>
+        <button class="btn btn--ghost" id="restartBtn" aria-label="Restart game">Restart</button>
+      </div>
+    </section>
+
+    <!-- ===== GAME OVER DIALOG ===== -->
+    <div class="dialog-overlay" id="gameOverOverlay" hidden aria-modal="true" role="dialog" aria-labelledby="gameOverTitle">
+      <div class="dialog">
+        <h2 id="gameOverTitle" class="dialog__title">Game Over</h2>
+        <div class="dialog__stats" id="gameOverStats">
+          <!-- filled by game.js -->
+        </div>
+        <div class="dialog__error" id="saveError" aria-live="assertive"></div>
+        <div class="dialog__actions">
+          <button class="btn btn--primary" id="saveScoreBtn">💾 Save Score</button>
+          <button class="btn btn--ghost" id="playAgainBtn">▶ Play Again</button>
+        </div>
+        <div class="dialog__success" id="saveSuccess" aria-live="polite" hidden></div>
+      </div>
+    </div>
+
+    <!-- ===== LEVEL UP BANNER ===== -->
+    <div class="level-up-banner" id="levelUpBanner" aria-live="polite" hidden></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>WordBlast &bull; Web Fundamentals 2026 &bull; <span id="footerYear"></span></p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

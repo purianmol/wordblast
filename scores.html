@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WordBlast – Leaderboard. View, sort and delete your saved scores from the typing game." />
+  <title>WordBlast – Leaderboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo" aria-label="WordBlast home">
+      ⚡ <span>WordBlast</span>
+    </a>
+    <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
+    <nav class="navbar__links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html">Play</a>
+      <a href="packs.html">Word Packs</a>
+      <a href="scores.html" class="active" aria-current="page">Scores</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">🌙</button>
+    </nav>
+  </header>
+
+  <main class="scores-main">
+    <h1 class="page-title">🏆 Leaderboard</h1>
+    <p class="page-subtitle">Your best games, ranked and sorted.</p>
+
+    <!-- ===== CONTROLS ===== -->
+    <div class="scores-controls">
+      <div class="form-group form-group--inline">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect" name="sort">
+          <option value="score">Score</option>
+          <option value="wpm">WPM</option>
+          <option value="accuracy">Accuracy</option>
+          <option value="date">Date</option>
+        </select>
+      </div>
+      <button class="btn btn--danger btn--small" id="clearAllBtn" aria-label="Clear all scores from the leaderboard">
+        🗑 Clear All
+      </button>
+    </div>
+
+    <!-- ===== SCORES TABLE ===== -->
+    <div class="table-wrap" aria-label="Scores leaderboard">
+      <table class="scores-table" id="scoresTable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player</th>
+            <th scope="col">Pack</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Score</th>
+            <th scope="col">WPM</th>
+            <th scope="col">Accuracy</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="scoresBody">
+          <!-- rows rendered by scores.js -->
+        </tbody>
+      </table>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyScoresMsg" hidden>
+        <p>No scores yet – <a href="index.html">go play!</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>WordBlast &bull; Web Fundamentals 2026 &bull; <span id="footerYear"></span></p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scores.js"></script>
+</body>
+</html>
