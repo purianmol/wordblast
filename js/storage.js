@@ -13,7 +13,12 @@ const DEFAULT_PACKS = [
     name: 'Animals',
     words: [
       'tiger', 'zebra', 'monkey', 'rabbit', 'dolphin', 'panther', 'cheetah',
-      'giraffe', 'penguin', 'elephant', 'jaguar', 'falcon', 'buffalo', 'ostrich', 'hamster'
+      'giraffe', 'penguin', 'elephant', 'jaguar', 'falcon', 'buffalo', 'ostrich',
+      'hamster', 'parrot', 'cougar', 'koala', 'panda', 'gorilla', 'pelican',
+      'walrus', 'hyena', 'coyote', 'badger', 'lynx', 'iguana', 'gecko',
+      'python', 'cobra', 'heron', 'toucan', 'beaver', 'otter', 'meerkat',
+      'wombat', 'dingo', 'bison', 'moose', 'reindeer', 'alpaca', 'llama',
+      'platypus', 'axolotl', 'lemur', 'manatee', 'narwhal'
     ]
   },
   {
@@ -21,7 +26,12 @@ const DEFAULT_PACKS = [
     name: 'JavaScript Terms',
     words: [
       'array', 'object', 'function', 'closure', 'promise', 'async', 'await',
-      'callback', 'prototype', 'scope', 'hoisting', 'event', 'module', 'class', 'iterator'
+      'callback', 'prototype', 'scope', 'hoisting', 'event', 'module', 'class',
+      'iterator', 'generator', 'proxy', 'symbol', 'map', 'set', 'weakmap',
+      'fetch', 'boolean', 'string', 'number', 'typeof', 'instanceof', 'spread',
+      'destructure', 'arrow', 'template', 'const', 'let', 'var', 'export',
+      'import', 'default', 'static', 'extends', 'getter', 'setter', 'reduce',
+      'filter', 'forEach', 'includes', 'indexOf', 'splice', 'concat', 'slice'
     ]
   },
   {
@@ -29,7 +39,40 @@ const DEFAULT_PACKS = [
     name: 'Fruits and Food',
     words: [
       'mango', 'banana', 'orange', 'pizza', 'burger', 'grapes', 'papaya',
-      'lychee', 'cherry', 'melon', 'waffle', 'salad', 'pasta', 'sushi', 'taco'
+      'lychee', 'cherry', 'melon', 'waffle', 'salad', 'pasta', 'sushi', 'taco',
+      'ramen', 'curry', 'falafel', 'hummus', 'burrito', 'donut', 'brownie',
+      'cheesecake', 'tiramisu', 'muffin', 'pretzel', 'granola', 'smoothie',
+      'avocado', 'broccoli', 'spinach', 'beetroot', 'zucchini', 'pumpkin',
+      'pomelo', 'guava', 'jackfruit', 'tamarind', 'litchi', 'starfruit',
+      'dragonfruit', 'persimmon', 'apricot', 'nectarine', 'tangerine', 'quince'
+    ]
+  },
+  {
+    id: 4,
+    name: 'Countries',
+    words: [
+      'brazil', 'canada', 'france', 'germany', 'mexico', 'japan', 'china',
+      'india', 'russia', 'italy', 'spain', 'turkey', 'egypt', 'kenya',
+      'nigeria', 'ghana', 'peru', 'chile', 'colombia', 'argentina', 'sweden',
+      'norway', 'denmark', 'finland', 'poland', 'ukraine', 'romania', 'hungary',
+      'vietnam', 'thailand', 'malaysia', 'indonesia', 'pakistan', 'nepal',
+      'bhutan', 'jordan', 'morocco', 'algeria', 'ethiopia', 'tanzania',
+      'senegal', 'bolivia', 'ecuador', 'uruguay', 'paraguay', 'serbia',
+      'croatia', 'slovakia', 'latvia', 'estonia'
+    ]
+  },
+  {
+    id: 5,
+    name: 'Sports',
+    words: [
+      'cricket', 'tennis', 'hockey', 'boxing', 'cycling', 'rowing', 'skiing',
+      'swimming', 'football', 'baseball', 'badminton', 'archery', 'fencing',
+      'sailing', 'surfing', 'diving', 'climbing', 'triathlon', 'marathon',
+      'sprinting', 'javelin', 'discus', 'hurdles', 'wrestling', 'judo',
+      'karate', 'taekwondo', 'gymnastics', 'skating', 'snowboard', 'biathlon',
+      'handball', 'lacrosse', 'polo', 'squash', 'racquetball', 'curling',
+      'bobsled', 'luge', 'decathlon', 'pentathlon', 'weightlifting', 'shooting',
+      'equestrian', 'kayaking', 'canoe', 'paragliding', 'motocross'
     ]
   }
 ];

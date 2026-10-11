@@ -1,9 +1,8 @@
-# 📐 WordBlast – Project Blueprint (Specification Sheet)
+# WordBlast – Project Blueprint
 
 | | |
 |---|---|
 | **Project** | WordBlast – Falling Words Typing Game |
-| **Course** | Web Fundamentals 2026 |
 | **Type** | Frontend-only web application |
 | **Stack** | HTML5 · CSS3 · Vanilla JavaScript (ES6) |
 | **Storage** | localStorage · sessionStorage · Cookies · IndexedDB |
@@ -11,31 +10,19 @@
 
 ---
 
-## 1. Requirement Compliance Check
+## 1. Requirement Compliance
 
-Every guideline from the project brief, mapped to how WordBlast satisfies it.
-
-| # | Requirement (from brief) | How WordBlast meets it | Status |
+| # | Requirement | How WordBlast meets it | Status |
 |---|---|---|---|
 | 1 | Frontend-only app | No server, no API calls, runs from `index.html` | ✅ |
 | 2 | Tech stack: HTML, CSS, JS | Only these three languages are used | ✅ |
-| 3 | No external libraries (except CSS) | No JS libraries or frameworks. CSS is hand-written (an optional Google Font is a CSS import) | ✅ |
-| 4 | Include features covered in class | See the concept map in section 9. **Confirm against your class notes** | ⚠️ Verify |
+| 3 | No external libraries | No JS libraries or frameworks. CSS is hand-written (Google Font is a CSS import only) | ✅ |
+| 4 | Features covered in class | See concept map in section 9 | ✅ |
 | 5 | Responsive: mobile, tablet, desktop | 3 breakpoints, Flexbox/Grid, tested at 360px, 768px, 1280px | ✅ |
 | 6 | At least 2 pages | 3 pages | ✅ |
 | 7 | Storage: Web storage, cookie, IndexedDB | localStorage (packs), sessionStorage (last selection), cookies (theme, player name), IndexedDB (scores) | ✅ |
 | 8 | CRUD operations | Full CRUD on Word Packs and on Scores | ✅ |
-| 9 | GitHub repo, 10+ commits on different days | 10-day plan in section 12 (Oct 1–10) | ⚠️ Zero spare days |
-| 10 | README.md in Markdown with proposal | README has description, goals, specifications, design | ✅ |
-| 11 | Project details added to sheet | 3–4 line write-up ready (see section 13) | ⚠️ Overdue (30 Sep) |
-| 12 | Proposal in README by 30 Sep | Ready, but the date has passed. Push it today | ⚠️ Overdue |
-| 13 | Code complete by 10 Oct | 10-day plan ends on 10 Oct | ✅ |
-| 14 | (Optional) Cloud deployment | GitHub Pages, free and takes about 2 minutes | ➕ Optional |
-
-**Findings from verification (already fixed in README):**
-1. The first draft used only localStorage and cookies. The brief lists IndexedDB too, so scores now use **IndexedDB**.
-2. "Press Enter or auto-match" was ambiguous. The rule is now **auto-match**, and Enter only clears a wrong attempt.
-3. Validation wording was vague. Exact rules are now in section 7.
+| 9 | README.md with proposal | README has description, goals, specs, design | ✅ |
 
 ---
 
@@ -69,9 +56,9 @@ Every guideline from the project brief, mapped to how WordBlast satisfies it.
 |----|-------------|
 | N1 | Works offline once files are loaded (no network calls) |
 | N2 | Works in the latest Chrome, Edge, Firefox |
-| N3 | Game runs at a smooth speed (uses `requestAnimationFrame`) |
+| N3 | Game runs at smooth speed (uses `requestAnimationFrame`) |
 | N4 | Touch-friendly: buttons at least 44px tall, input auto-focused on Start |
-| N5 | Accessible basics: labels on inputs, `alt`/`aria-label`, visible focus outline, good colour contrast |
+| N5 | Accessible basics: labels on inputs, `aria-label`, visible focus outline |
 | N6 | Clean, commented code with a separate JS file per feature |
 
 ---
@@ -88,7 +75,7 @@ Every guideline from the project brief, mapped to how WordBlast satisfies it.
 | Game area | Bordered box with falling words and a red "danger line" at the bottom |
 | Controls | Typing `<input>`, **Pause/Resume**, **Restart** |
 | Game-over dialog | Final score, level, WPM, accuracy, **Save Score**, **Play Again** |
-| Footer | Name, course, year |
+| Footer | Course, year |
 
 **States:** `idle` → `running` ⇄ `paused` → `gameover`
 
@@ -108,7 +95,7 @@ Every guideline from the project brief, mapped to how WordBlast satisfies it.
 | Controls | Sort `<select>` (Score, WPM, Accuracy, Date), **Clear All** |
 | Table | Rank, Player, Pack, Difficulty, Score, WPM, Accuracy, Date, Actions (**Edit**, **Delete**) |
 | Empty state | "No scores yet – go play!" with a link to Play |
-| Edit | Inline edit of the player name (prompt or inline input) |
+| Edit | Inline edit of the player name via prompt |
 
 ---
 
@@ -120,12 +107,12 @@ Every guideline from the project brief, mapped to how WordBlast satisfies it.
 |------|---------|-----------|-----|
 | Word packs (array) | `localStorage` | `wb_packs` | Small, simple JSON |
 | Seeded flag | `localStorage` | `wb_seeded` | Seed defaults only on first visit |
-| Last pack + difficulty | `sessionStorage` | `wb_lastSetup` | Pre-fill the setup panel for this browser session only |
+| Last pack + difficulty | `sessionStorage` | `wb_lastSetup` | Pre-fill the setup panel for this session |
 | Theme | Cookie | `wb_theme` (`dark` / `light`) | Preference, 365 days |
 | Last player name | Cookie | `wb_player` | Pre-fill name, 365 days |
 | Scores | `IndexedDB` | DB `wordblastDB` v1, store `scores` | Larger, structured, queryable data |
 
-### 5.2 Word Pack object (`wb_packs` = array of these)
+### 5.2 Word Pack object
 
 | Field | Type | Rule |
 |-------|------|------|
@@ -147,15 +134,17 @@ Every guideline from the project brief, mapped to how WordBlast satisfies it.
 | `accuracy` | number | 0–100, rounded |
 | `date` | string | ISO date, e.g. `2026-10-05` |
 
-Indexes: `score`, `date`.
+Indexes: `score`, `date`, `wpm`, `accuracy`.
 
 ### 5.4 Default Packs (seeded on first visit)
 
-| Pack | Example words (15+ each) |
-|------|--------------------------|
-| Animals | tiger, zebra, monkey, rabbit, dolphin … |
-| JavaScript Terms | array, object, function, closure, promise … |
-| Fruits and Food | mango, banana, orange, pizza, burger … |
+| Pack | Word count |
+|------|-----------|
+| Animals | 47 words |
+| JavaScript Terms | 48 words |
+| Fruits and Food | 47 words |
+| Countries | 50 words |
+| Sports | 49 words |
 
 ---
 
@@ -166,7 +155,7 @@ Indexes: `score`, `date`.
 Speed is measured in **% of game-area height per second**, so it behaves the same on every screen size.
 
 | Difficulty | Fall speed | Spawn gap | Max words on screen |
-|-----------|-----------|-----------|--------------------|
+|-----------|-----------|-----------|---|
 | Easy | 9 %/s (about 11 s to fall) | 2.5 s | 4 |
 | Medium | 13 %/s (about 7.7 s) | 2.0 s | 6 |
 | Hard | 19 %/s (about 5.3 s) | 1.5 s | 8 |
@@ -180,12 +169,12 @@ Speed is measured in **% of game-area height per second**, so it behaves the sam
 ### 6.3 Scoring
 
 - `points = wordLength × 10 + (combo − 1) × 5`
-- `combo` increases by 1 for each destroyed word (capped at 10) and resets to 1 when a word is missed or a wrong attempt is made.
+- `combo` increases by 1 for each destroyed word (capped at 10) and resets to 1 when a word is missed or a wrong attempt is submitted.
 - Example: destroying "tiger" (5 letters) on combo 3 → 50 + 10 = **60 points**.
 
 ### 6.4 Lives
 
-- Start with 3 lives. A word touching the danger line is removed and `lives −= 1`.
+- Start with 3 lives. A word touching the danger line is removed and `lives -= 1`.
 - Game over when `lives == 0`.
 
 ### 6.5 Stats
@@ -224,8 +213,8 @@ Speed is measured in **% of game-area height per second**, so it behaves the sam
 | File | Responsibility |
 |------|---------------|
 | `js/common.js` | Hamburger menu toggle, theme apply/toggle, footer year |
-| `js/storage.js` | `localStorage` pack helpers, `sessionStorage` helpers, cookie helpers |
-| `js/db.js` | IndexedDB open + scores CRUD (Promise based) |
+| `js/storage.js` | `localStorage` pack helpers, `sessionStorage` helpers, cookie helpers, default packs |
+| `js/db.js` | IndexedDB open + scores CRUD (Promise-based) |
 | `js/game.js` | Game state, loop, spawning, input matching, scoring, game over |
 | `js/packs.js` | Word Packs page: form, validation, render, edit, delete |
 | `js/scores.js` | Leaderboard page: render, sort, edit, delete, clear |
@@ -240,16 +229,16 @@ Speed is measured in **% of game-area height per second**, so it behaves the sam
 `openDB()` · `addScore(score)` · `getAllScores()` · `updateScore(id, changes)` · `deleteScore(id)` · `clearScores()`
 
 **game.js**
-`startGame()` · `gameLoop(timestamp)` · `spawnWord()` · `moveWords(dt)` · `handleInput(e)` · `destroyWord(word)` · `missWord(word)` · `updateStats()` · `levelUp()` · `pauseGame()` / `resumeGame()` · `endGame()` · `saveCurrentScore()`
+`handleStart()` · `gameLoop(timestamp)` · `spawnWord()` · `moveWords(dt)` · `handleInput()` · `destroyWord(word)` · `missWord(word)` · `updateStats()` · `levelUp()` · `pauseGame()` / `resumeGame()` · `endGame()` · `handleSaveScore()`
 
 **packs.js**
-`renderPacks()` · `handleSave(e)` · `validatePack(name, rawWords, editingId)` · `parseWords(raw)` · `editPack(id)` · `deletePack(id)` · `resetForm()`
+`renderPacks()` · `handleSave(e)` · `validatePack(name, words, editingId)` · `parseWords(raw)` · `editPack(id)` · `deletePack(id)` · `resetForm()`
 
 **scores.js**
-`renderScores(sortKey)` · `editPlayer(id)` · `removeScore(id)` · `clearAll()`
+`renderScores(sortKey)` · `editPlayer(id)` · `removeScore(id)` · `handleClearAll()`
 
 **common.js**
-`applyTheme(theme)` · `toggleTheme()` · `initNav()`
+`applyTheme(theme)` · `toggleTheme()` · `initNav()` · `initFooterYear()`
 
 ### 8.3 Module dependencies
 
@@ -264,10 +253,10 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 
 ---
 
-## 9. Class Concept Map (where each topic is used)
+## 9. Class Concept Map
 
 | Topic | Where it is used |
-|-------|------------------|
+|-------|-----------------|
 | Semantic HTML | `header`, `nav`, `main`, `section`, `footer` on every page |
 | Forms and inputs | Pack form, setup panel, typing input |
 | Tables | Leaderboard |
@@ -275,8 +264,8 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 | Flexbox | Navbar, stats bar, controls |
 | Grid | Pack card grid |
 | CSS variables | Colours and theme switching |
-| Transitions / animations | Word glow, explosion effect, button hovers, dialog fade |
-| Media queries | 3 breakpoints |
+| Transitions / animations | Word glow, pop effect, button hovers, dialog fade |
+| Media queries | 3 breakpoints (600px, 992px) |
 | Variables, functions, ES6 | All JS |
 | Arrays and objects | Packs, scores, active words |
 | Array methods | `map`, `filter`, `sort`, `find`, `reduce`, `some` |
@@ -287,9 +276,8 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 | Web Storage | localStorage + sessionStorage |
 | Cookies | Theme and player name |
 | IndexedDB | Scores |
+| Promises / async-await | IndexedDB helpers |
 | Validation | Pack form, player name |
-
-> ⚠️ **Action for you:** compare this table with your class notes. If a topic taught in class is missing (e.g. `fetch`, Promises/async-await, classes, destructuring, Web Workers), add a small use of it. Promises/async-await are already needed for IndexedDB.
 
 ---
 
@@ -315,8 +303,8 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 ### 10.3 Breakpoints
 
 | Name | Width | Changes |
-|------|-------|---------|
-| Mobile | `< 600px` | Hamburger menu, stats wrap into 2 rows, 1-column packs, game area height about 55vh |
+|------|-------|---------| 
+| Mobile | `< 600px` | Hamburger menu, stats wrap into 2 rows, 1-column packs, game area height ~55vh |
 | Tablet | `600–992px` | 2-column packs, stats in one row |
 | Desktop | `> 992px` | Full navbar, 3-column packs, game area up to 900px wide |
 
@@ -333,7 +321,7 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 
 | # | Test | Expected result |
 |---|------|----------------|
-| T1 | Open the app for the first time | 3 default packs exist |
+| T1 | Open the app for the first time | 5 default packs exist |
 | T2 | Start game, type a falling word | Word disappears, score increases |
 | T3 | Let a word reach the bottom | Life decreases by 1 |
 | T4 | Lose all 3 lives | Game-over dialog appears |
@@ -350,48 +338,16 @@ Script load order on each page: `storage.js` → `db.js` (if needed) → `common
 | T15 | Delete one score / Clear all | Rows removed from IndexedDB |
 | T16 | Toggle theme and reload | Theme persists (cookie) |
 | T17 | Resize to 360px / 768px / 1280px | Layout adapts, no horizontal scroll |
-| T18 | Play on a phone | Keyboard opens, input is usable |
-| T19 | Open browser DevTools → Application | localStorage, sessionStorage, cookies and IndexedDB all show data |
+| T18 | Open browser DevTools → Application | localStorage, sessionStorage, cookies and IndexedDB all show data |
 
 ---
 
-## 12. Git and Delivery Plan
-
-Rule: **one commit per day, 10 different days**. The window Oct 1–10 has exactly 10 days, so you cannot skip any day. Make more than one commit per day if you like, but never rely on a "catch-up" day.
-
-| Date | Commit focus | Example message |
-|------|-------------|-----------------|
-| Oct 1 | Repo, README, folder structure | `Initial commit: add README and project structure` |
-| Oct 2 | HTML for all 3 pages | `Add HTML structure for play, packs and scores pages` |
-| Oct 3 | Base CSS, navbar, theme variables | `Add base styles, navbar and dark/light theme` |
-| Oct 4 | Responsive CSS and media queries | `Make layout responsive for mobile, tablet, desktop` |
-| Oct 5 | Falling words + movement | `Add word spawning and falling animation` |
-| Oct 6 | Typing detection, score, lives, game over | `Implement typing match, scoring and lives` |
-| Oct 7 | Packs: create + read, storage.js | `Add word pack create and display with localStorage` |
-| Oct 8 | Packs: edit + delete + validation | `Add edit, delete and validation for packs` |
-| Oct 9 | IndexedDB scores + leaderboard + cookie theme | `Add IndexedDB scores, leaderboard and theme cookie` |
-| Oct 10 | Testing, polish, final README | `Final testing, bug fixes and README update` |
-
-**Optional deployment:** Repo → Settings → Pages → Deploy from branch `main` / root. Add the live link to the README.
-
----
-
-## 13. Sheet Entry (copy-paste)
-
-**Project Name:** WordBlast
-
-**Project Details (3–4 lines):**
-> WordBlast is a responsive typing game where words fall down the screen and players must type them before they reach the bottom. Players can create, edit and delete their own custom word packs, choose a difficulty level, and track scores, accuracy and typing speed (WPM) on a leaderboard. Built with HTML, CSS and vanilla JavaScript, with data stored in the browser using localStorage, sessionStorage, cookies and IndexedDB.
-
-**GitHub repository path:** `https://github.com/<your-username>/wordblast`
-
----
-
-## 14. Assumptions and Risks
+## 12. Assumptions and Edge Cases
 
 | Item | Note |
 |------|------|
-| Class syllabus | Not visible to the author. Check section 9 against your notes |
-| Mobile typing | On-screen keyboards cover part of the screen; the game area height is reduced on mobile to compensate |
+| Mobile typing | On-screen keyboards cover part of the screen; game area height is reduced on mobile to compensate |
 | Private browsing | IndexedDB or storage may be restricted; the app shows a friendly message if opening the DB fails |
-| Scope | If time runs short, drop: restore-defaults button, edit-score feature, light theme. Core = play + pack CRUD + save/delete scores |
+| Word pool cycling | When all words in a pack have been shown, the pool reshuffles and cycles again |
+| Same word on screen twice | The lowest instance is destroyed first |
+| Tab switch | Game auto-pauses when `document.hidden` is true |

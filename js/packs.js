@@ -160,9 +160,9 @@ function deletePack(id) {
 
 // ---- Restore defaults ----
 function handleRestoreDefaults() {
-  if (!confirm('Restore the 3 default packs? Your custom packs will not be removed.')) return;
+  if (!confirm('Restore the 5 default packs? Your custom packs will not be removed.')) return;
   const packs     = getPacks();
-  const defaultIds = [1, 2, 3];
+  const defaultIds = [1, 2, 3, 4, 5];
 
   // Only restore packs that don't already exist (by id)
   resetDefaultPacks();   // rewrites all 3 defaults into storage
