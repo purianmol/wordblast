@@ -24,38 +24,87 @@
     </nav>
   </header>
 
-  <main>
-    <!-- ===== SETUP PANEL ===== -->
-    <section class="setup-panel" id="setupPanel" aria-labelledby="setupHeading">
-      <h1 id="setupHeading" class="setup-panel__title">⚡ WordBlast</h1>
-      <p class="setup-panel__subtitle">Type falling words before they hit the ground!</p>
+  <main class="landing-main">
 
-      <div class="setup-panel__form">
-        <div class="form-group">
-          <label for="packSelect">Word Pack</label>
-          <select id="packSelect" name="pack">
-            <option value="">Loading packs…</option>
-          </select>
+    <!-- ===== SETUP PANEL (Landing Hero) ===== -->
+    <section class="hero" id="setupPanel" aria-labelledby="setupHeading">
+
+      <!-- Animated background words -->
+      <div class="hero__bg-words" aria-hidden="true">
+        <span class="bg-word" style="--x:8%;  --dur:7s;  --delay:0s;   --size:1.1rem">array</span>
+        <span class="bg-word" style="--x:20%; --dur:9s;  --delay:1.5s; --size:0.9rem">tiger</span>
+        <span class="bg-word" style="--x:34%; --dur:6s;  --delay:0.8s; --size:1.3rem">python</span>
+        <span class="bg-word" style="--x:48%; --dur:8s;  --delay:2.2s; --size:1rem">brazil</span>
+        <span class="bg-word" style="--x:60%; --dur:7.5s;--delay:0.3s; --size:1.2rem">cricket</span>
+        <span class="bg-word" style="--x:73%; --dur:10s; --delay:1s;   --size:0.85rem">promise</span>
+        <span class="bg-word" style="--x:85%; --dur:6.5s;--delay:2.8s; --size:1.1rem">mango</span>
+        <span class="bg-word" style="--x:14%; --dur:11s; --delay:3.5s; --size:0.95rem">dolphin</span>
+        <span class="bg-word" style="--x:27%; --dur:8.5s;--delay:0.5s; --size:1.15rem">closure</span>
+        <span class="bg-word" style="--x:54%; --dur:9.5s;--delay:4s;   --size:0.8rem">falcon</span>
+        <span class="bg-word" style="--x:67%; --dur:7.2s;--delay:1.8s; --size:1.05rem">tennis</span>
+        <span class="bg-word" style="--x:79%; --dur:12s; --delay:0.2s; --size:0.9rem">ramen</span>
+      </div>
+
+      <!-- Hero content -->
+      <div class="hero__content">
+        <div class="hero__badge">⚡ Typing Game</div>
+        <h1 id="setupHeading" class="hero__title">
+          <span class="hero__title-blast">Word</span><span class="hero__title-accent">Blast</span>
+        </h1>
+        <p class="hero__subtitle">Words fall. You type. Don't miss.</p>
+
+        <!-- Feature pills -->
+        <div class="hero__pills" aria-label="Game features">
+          <span class="pill">⚡ Auto-match</span>
+          <span class="pill">🔥 Combo streaks</span>
+          <span class="pill">📈 WPM tracking</span>
+          <span class="pill">🎨 5 word packs</span>
         </div>
 
-        <div class="form-group">
-          <label for="difficultySelect">Difficulty</label>
-          <select id="difficultySelect" name="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option>
-          </select>
+        <!-- Setup card -->
+        <div class="setup-card" role="form" aria-label="Game setup">
+          <div class="setup-card__header">
+            <span class="setup-card__step">Ready to play?</span>
+          </div>
+
+          <div class="setup-card__body">
+            <div class="setup-row">
+              <div class="form-group">
+                <label for="packSelect">Word Pack</label>
+                <select id="packSelect" name="pack">
+                  <option value="">Loading packs…</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="difficultySelect">Difficulty</label>
+                <select id="difficultySelect" name="difficulty">
+                  <option value="easy">🟢 Easy</option>
+                  <option value="medium" selected>🟡 Medium</option>
+                  <option value="hard">🔴 Hard</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="playerNameInput">Your Name</label>
+              <input type="text" id="playerNameInput" name="player"
+                placeholder="Enter your name" maxlength="15" autocomplete="off" />
+              <span class="field-error" id="playerNameError" aria-live="polite"></span>
+            </div>
+
+            <button class="btn btn--primary btn--launch" id="startBtn">
+              ▶ &nbsp;Launch Game
+            </button>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="playerNameInput">Your Name</label>
-          <input type="text" id="playerNameInput" name="player" placeholder="Enter your name" maxlength="15" autocomplete="off" />
-          <span class="field-error" id="playerNameError" aria-live="polite"></span>
+        <!-- Quick links -->
+        <div class="hero__links">
+          <a href="packs.html" class="hero__link">📦 Manage Packs</a>
+          <span class="hero__link-sep">·</span>
+          <a href="scores.html" class="hero__link">🏆 Leaderboard</a>
         </div>
-
-        <button class="btn btn--primary btn--large" id="startBtn">
-          ▶ Start Game
-        </button>
       </div>
     </section>
 

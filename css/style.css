@@ -80,6 +80,14 @@ main {
   padding: calc(var(--nav-h) + 24px) 16px 32px;
 }
 
+/* Landing page has no side padding — hero is full-width inside main */
+.landing-main {
+  max-width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   color: var(--primary);
   text-decoration: none;
@@ -308,37 +316,213 @@ a:hover { text-decoration: underline; }
    PLAY PAGE
    ===================================================== */
 
-/* Setup panel */
-.setup-panel {
-  max-width: 460px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 24px 0 0;
+/* =====================================================
+   HERO / LANDING
+   ===================================================== */
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h));
+  margin-top: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 48px 20px 60px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(108,123,255,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(34,211,238,.09) 0%, transparent 60%),
+    var(--bg);
 }
-.setup-panel__title {
-  font-size: 2.8rem;
+
+/* Animated background words */
+.hero__bg-words {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-word {
+  position: absolute;
+  top: -2rem;
+  left: var(--x);
+  font-family: 'Courier New', monospace;
+  font-size: var(--size);
   font-weight: 700;
-  letter-spacing: -1px;
   color: var(--primary);
-  text-shadow: 0 0 24px rgba(108,123,255,.5);
-  margin-bottom: 8px;
+  opacity: 0.07;
+  animation: bgWordFall var(--dur) linear var(--delay) infinite;
+  white-space: nowrap;
+  user-select: none;
 }
-.setup-panel__subtitle {
+
+[data-theme="light"] .bg-word { opacity: 0.05; }
+
+@keyframes bgWordFall {
+  0%   { transform: translateY(0);    opacity: 0; }
+  10%  { opacity: 0.07; }
+  90%  { opacity: 0.07; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Hero content */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(108,123,255,.12);
+  border: 1px solid rgba(108,123,255,.3);
+  border-radius: 40px;
+  padding: 5px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  font-size: clamp(3.2rem, 10vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  margin: 0;
+}
+.hero__title-blast {
+  color: var(--text);
+}
+.hero__title-accent {
+  color: var(--primary);
+  text-shadow:
+    0 0 30px rgba(108,123,255,.6),
+    0 0 80px rgba(108,123,255,.3);
+}
+
+.hero__subtitle {
+  font-size: 1.15rem;
   color: var(--text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 28px;
+  font-weight: 400;
+  margin: -8px 0 0;
+  letter-spacing: 0.02em;
 }
-.setup-panel__form {
+
+/* Feature pills */
+.hero__pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: border-color var(--transition), color var(--transition);
+}
+.pill:hover { border-color: var(--primary); color: var(--text); }
+
+/* Setup card */
+.setup-card {
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px;
-  text-align: left;
-  box-shadow: var(--shadow);
+  box-shadow:
+    var(--shadow),
+    0 0 0 1px rgba(108,123,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
 }
-.setup-panel__form .btn { width: 100%; margin-top: 8px; }
 
-/* Stats bar */
+.setup-card__header {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.setup-card__step {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.setup-card__body {
+  padding: 24px;
+  text-align: left;
+}
+
+.setup-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.btn--launch {
+  width: 100%;
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  margin-top: 6px;
+  background: linear-gradient(135deg, var(--primary), #9b6bff);
+  border: none;
+  box-shadow: 0 4px 20px rgba(108,123,255,.4);
+  letter-spacing: 0.03em;
+}
+.btn--launch:hover {
+  background: linear-gradient(135deg, var(--primary-h), #8b5bef);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(108,123,255,.5);
+}
+
+/* Quick links */
+.hero__links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+}
+.hero__link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+  font-weight: 500;
+}
+.hero__link:hover { color: var(--primary); text-decoration: none; }
+.hero__link-sep { color: var(--border); }
+
+/* =====================================================
+   GAME AREA (same as before, lives inside landing-main)
+   ===================================================== */
+
+.game-area-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 20px) 16px 32px;
+}
+
+
 .stats-bar {
   display: flex;
   flex-wrap: wrap;
@@ -372,7 +556,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* Game canvas */
-.game-area-wrap { width: 100%; }
+/* game-area-wrap – defined above in hero section with full padding */
 .game-canvas {
   position: relative;
   width: 100%;
@@ -804,8 +988,13 @@ a:hover { text-decoration: underline; }
   }
   .theme-toggle { margin-left: 0; width: 100%; justify-content: center; }
 
-  .setup-panel__title { font-size: 2rem; }
-  .setup-panel__form { padding: 20px 16px; }
+  /* Hero mobile */
+  .hero { padding: 32px 16px 48px; }
+  .hero__title { letter-spacing: -1.5px; }
+  .setup-row { grid-template-columns: 1fr; gap: 0; }
+  .setup-card__body { padding: 16px; }
+  .hero__pills { gap: 6px; }
+  .pill { font-size: 0.76rem; padding: 4px 12px; }
 
   .game-canvas { height: 52vh; min-height: 280px; }
 
