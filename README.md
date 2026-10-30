@@ -64,14 +64,3 @@ wordblast/
     ├── BLUEPRINT.md
     └── HOW_IT_WORKS.md
 ```
-
-## How to run
-
-1. Clone the repo: `git clone <repo-url>`
-2. Open `index.html` in any modern browser.
-3. No install or server needed.
-
-## Docs
-
-- [`docs/BLUEPRINT.md`](docs/BLUEPRINT.md) – full spec and requirement checklist
-- [`docs/HOW_IT_WORKS.md`](docs/HOW_IT_WORKS.md) – detailed walkthrough of the code
